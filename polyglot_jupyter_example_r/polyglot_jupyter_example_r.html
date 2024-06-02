@@ -7628,7 +7628,11 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p><strong>Note:</strong> I have a lot of packages installed globally, including lots from bioconductor. These are not visible here. Therefore, we are successfully running an R kernel inside the renv.</p>
+<p><strong>Note:</strong> I have a lot of packages installed globally, including lots from bioconductor. These are
+not visible here. Therefore, we are successfully running an R kernel inside the renv.</p>
+<p>You're also going to most likely want to set up an <code>.renvignore</code> rather than just relying on it
+parsing your <code>.gitignore</code>. renv has a hard time parsing large files and it appears to lock
+the R terminal when that happens. You can use my example: <a href=".renvignore">.renvignore</a>.</p>
 </div>
 </div>
 </div>
@@ -9664,18 +9668,37 @@ QGAHAAAA4CEQ2AEAAAB4CAR2AAAAAB7i/wHAPR3A4kOLRQAAAABJRU5ErkJggg==" width="420"/>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=dc2d65ae-91e7-43a4-be41-3f524e75b4bd">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=dc2d65ae-91e7-43a4-be41-3f524e75b4bd">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [117]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [155]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-r"><pre><span></span><span class="c1"># To make the swarmplot we need ggbeeswarm</span>
-
+<span class="nf">install.packages</span><span class="p">(</span><span class="s">"ggbeeswarm"</span><span class="p">)</span>
 <span class="nf">library</span><span class="p">(</span><span class="n">ggbeeswarm</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>The following package(s) will be installed:
+- ggbeeswarm [0.7.2]
+These packages will be installed into "~/Development/github/polyglot_jupyter_example/renv/library/linux-ubuntu-focal/R-4.4/x86_64-pc-linux-gnu".
+
+# Installing packages --------------------------------------------------------
+- Installing ggbeeswarm ...                     OK [linked from cache]
+Successfully installed 1 package in 12 milliseconds.
+</pre>
 </div>
 </div>
 </div>
@@ -11680,7 +11703,11 @@ I7N23jNa8gAAAABJRU5ErkJggg==" width="420"/>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Document-the-Environment">Document the Environment<a class="anchor-link" href="#Document-the-Environment">¶</a></h3><p>Running <code>renv::snapshot()</code> will update the <a href="renv.lock">renv.lock</a>. I like to ensure all the packages
-in the environment are captured with <code>type = "all"</code> to avoid parsing potentially large notebook files.</p>
+in the environment are captured with <code>type = "all"</code> to avoid parsing potentially large notebook files
+and just record everything installed in the environment.</p>
+<p>If you've like more intelligent behavior then also saving your notebook as a plain <code>.r</code> script and
+ignoring all <code>.ipynb</code> files in the project directory with your <code>.renvignore</code> should allow it to
+record packages and dependencies as intended. However, I opt here for completeness over succinctness.</p>
 </div>
 </div>
 </div>
@@ -11689,7 +11716,7 @@ in the environment are captured with <code>type = "all"</code> to avoid parsing 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [127]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [157]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-r"><pre><span></span><span class="c1"># Update the lock file</span>
@@ -11834,6 +11861,12 @@ in the environment are captured with <code>type = "all"</code> to avoid parsing 
 - xml2            [* -&gt; 1.3.6]
 - yaml            [* -&gt; 2.3.8]
 
+# RSPM -----------------------------------------------------------------------
+- renv            [* -&gt; 1.0.7]
+
+The version of R recorded in the lockfile will be updated:
+- R               [* -&gt; 4.4.0]
+
 - Lockfile written to "~/Development/github/polyglot_jupyter_example/renv.lock".
 </pre>
 </div>
@@ -11856,7 +11889,7 @@ in the environment are captured with <code>type = "all"</code> to avoid parsing 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [130]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [159]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-r"><pre><span></span><span class="c1"># I also export the notebook as a .r script so it can be run without jupyter and .html so non-coders can view it</span>
@@ -11873,7 +11906,7 @@ in the environment are captured with <code>type = "all"</code> to avoid parsing 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [128]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [160]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-r"><pre><span></span><span class="nf">sessionInfo</span><span class="p">()</span>
@@ -11914,18 +11947,22 @@ other attached packages:
  [9] tibble_3.2.1     ggplot2_3.5.1    tidyverse_2.0.0 
 
 loaded via a namespace (and not attached):
- [1] bit_4.0.5          gtable_0.3.5       jsonlite_1.8.8     compiler_4.4.0    
- [5] renv_1.0.7         crayon_1.5.2       tidyselect_1.2.1   IRdisplay_1.1     
- [9] parallel_4.4.0     scales_1.3.0       uuid_1.2-0         fastmap_1.2.0     
-[13] IRkernel_1.3.2     R6_2.5.1           labeling_0.4.3     generics_0.1.3    
-[17] munsell_0.5.1      RColorBrewer_1.1-3 pillar_1.9.0       tzdb_0.4.0        
-[21] rlang_1.1.3        utf8_1.2.4         stringi_1.8.4      repr_1.1.7        
-[25] bit64_4.0.5        timechange_0.3.0   cli_3.6.2          withr_3.0.0       
-[29] magrittr_2.0.3     digest_0.6.35      grid_4.4.0         vroom_1.6.5       
-[33] base64enc_0.1-3    hms_1.1.3          beeswarm_0.4.0     pbdZMQ_0.3-11     
-[37] lifecycle_1.0.4    vipor_0.4.7        vctrs_0.6.5        evaluate_0.23     
-[41] glue_1.7.0         farver_2.1.2       fansi_1.0.6        colorspace_2.1-0  
-[45] tools_4.4.0        pkgconfig_2.0.3    htmltools_0.5.8.1 </pre>
+ [1] gtable_0.3.5       beeswarm_0.4.0     xfun_0.44          htmlwidgets_1.6.4 
+ [5] tzdb_0.4.0         vctrs_0.6.5        tools_4.4.0        generics_0.1.3    
+ [9] parallel_4.4.0     fansi_1.0.6        cluster_2.1.6      pkgconfig_2.0.3   
+[13] data.table_1.15.4  checkmate_2.3.1    RColorBrewer_1.1-3 uuid_1.2-0        
+[17] lifecycle_1.0.4    compiler_4.4.0     farver_2.1.2       munsell_0.5.1     
+[21] repr_1.1.7         vipor_0.4.7        htmltools_0.5.8.1  htmlTable_2.4.2   
+[25] Formula_1.2-5      pillar_1.9.0       crayon_1.5.2       Hmisc_5.1-3       
+[29] rpart_4.1.23       tidyselect_1.2.1   digest_0.6.35      stringi_1.8.4     
+[33] labeling_0.4.3     fastmap_1.2.0      grid_4.4.0         colorspace_2.1-0  
+[37] cli_3.6.2          magrittr_2.0.3     base64enc_0.1-3    utf8_1.2.4        
+[41] IRdisplay_1.1      foreign_0.8-86     withr_3.0.0        scales_1.3.0      
+[45] backports_1.5.0    IRkernel_1.3.2     bit64_4.0.5        timechange_0.3.0  
+[49] rmarkdown_2.27     bit_4.0.5          nnet_7.3-19        gridExtra_2.3     
+[53] pbdZMQ_0.3-11      hms_1.1.3          evaluate_0.23      knitr_1.47        
+[57] rlang_1.1.3        glue_1.7.0         renv_1.0.7         rstudioapi_0.16.0 
+[61] vroom_1.6.5        jsonlite_1.8.8     R6_2.5.1          </pre>
 </div>
 </div>
 </div>

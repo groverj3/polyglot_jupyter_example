@@ -108,7 +108,7 @@ titanic |>
     theme_bw()
 
 # To make the swarmplot we need ggbeeswarm
-
+install.packages("ggbeeswarm")
 library(ggbeeswarm)
 
 # Combination violin and swarmplot, just like the python example
