@@ -1,0 +1,6 @@
+# Ignore notebook checkpoints
+# git keeps its own version history
+.ipynb_checkpoints
+
+# Ignore the virtual documents that juptyer makes
+.virtual_documents
