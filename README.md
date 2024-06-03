@@ -2,6 +2,10 @@
 An example of setting up a minimal environment for both R and Python in a 
 bioinformatics/data science Jupyter project.
 
+![What Sorcery is this?!](images/polyglot_notebooks.png)
+
+I am not a graphic designer.
+
 ## Purpose
 
 Sometimes you might really like a python library, sometimes you might prefer
