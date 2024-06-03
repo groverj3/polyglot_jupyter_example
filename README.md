@@ -112,7 +112,7 @@ project_repo_dir
     ├── {python_notebook_names}_r.r
     ├── {python_notebook_names}_r.html
     └── {analysis_outputs}
-├── README.md
+└── README.md
 ```
 
 ## Notes on .gitignore and .renvignore
