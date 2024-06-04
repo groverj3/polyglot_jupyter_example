@@ -43,7 +43,7 @@ To follow this, in no particular order:
    - `pip install jupyterlab`
 4. Make sure you have R installed, and then install the R kernel for jupyter.
    - Follow the directions [here](https://irkernel.github.io/installation/)
-5. Install in R [renv](https://rstudio.github.io/renv/index.html)
+5. Install [renv](https://rstudio.github.io/renv/index.html)
    - `install.packages("renv")`
 6. Proceed to setting up Python and R environments in this project.
 
@@ -67,7 +67,7 @@ To follow this, in no particular order:
 
 **Important Note:** If you're used to installing pip packages, etc. within a
 notebook by `! pip install {package}` you'll need to adjust your workflow. The
-shell that spawns does not know about your virtualenv. Just keep a terminal
+shell that jupyter spawns does not know about your virtualenv. Just keep a terminal
 open outside the notebook.
 
 ![Great Success!](images/python_env_jupyter.png)
@@ -78,16 +78,19 @@ This is somewhat easier, because R isn't controlling jupyter.
 
 1. Inside the project directory, start R.
    - `R`
-2. Initialize an renv.
+2. Install `renv`
+   - `install.packages("renv")`
+3. Restart the R session.
+4. Initialize an renv.
    - `renv::init(bare = TRUE)`
    - `bare = TRUE` keeps renv from parsing all text files in the project, if you're starting a
      project and it's not a blank slate (you have large notebooks and other files in it) this can cause renv to hang.
    - This creates a project-specific library, a `.Rprofile`, and `renv.lock` amongst other things.
-3. Exit R, and add configure bioconductor if you use it
+5. Exit R, and add configure bioconductor if you use it
    - Setup information for the posit package manager mirror of bioconductor: [here](https://packagemanager.posit.co/client/#/repos/bioconductor/setup)
-4. Enter R again and install the ir kernel and data science stack.
+6. Enter R again and install the ir kernel and data science stack.
    - `install.packages(c("tidyverse", "IRkernel"))`
-5. Make sure the R kernel is installed in jupyter outside the renv.
+7. Make sure the R kernel is installed in jupyter outside the renv.
 
 As long as you start your jupyter notebooks in the top level of the project folder then R kernels
 will respect your Renv.
@@ -121,23 +124,22 @@ By default renv will parse all files in your project to determine which
 packages need to be tracked in the `renv.lock`. This can be problematic if you
 have large files, including notebooks in the project folder.
 
-One way around them is to add these to `.gitignore`. Renv respects that as a list
+One way around this is to add large files to `.gitignore`. Renv respects that as a list
 of files and subdirectories not to parse. You'll notice this already will exist
 in the `./renv/` subdirectory it creates your project-specific library in to
 avoid having git track all that. This probably isn't sufficient to avoid having
 issues with it parsing notebooks, which you likely *do* want to track with git.
 
 If you create an `.renvignore` in your project folder then Renv will use that
-*instead* of `.gitignore`. So, you can have renv ignore anything you want, I
-have been naming notebooks I write python in with `_py` on the end so I can
-match them and output folders in `.renvignore` easily. This is kind of clunky
-though.
+*instead* of `.gitignore`. I have been naming notebooks I write python in with
+`_py` on the end so I can match them and output folders in `.renvignore`
+easily. This is kind of clunky though.
 
-In light of this I set up my `.gitignore` with typical settings from jupyter
-notebooks like this: [.gitignore](.gitignore). Basically, only ignoring the
+In light of this, I set up my `.gitignore` with typical settings from jupyter
+notebooks like this: [.gitignore](.gitignore). Ignoring the
 `.ipynb_checkpoints` and `.virtual_documents` folders.
 
-For `.renvignore` I create one that ignores all python-based notebooks. You may
+For `.renvignore`, I create one that ignores all python-based notebooks. You may
 want to tweak this to your liking: [.renvignore](.renvignore). You can get
 around the behavior of renv trying to parse large files by forcing it to record
 **all** packages *installed* in an environment rather than just ones *used* and
@@ -158,9 +160,10 @@ might also work well.
 
 Then, there's the nuclear option of every environment being a standalone
 [Docker](https://www.docker.com/) or [Podman](https://podman.io/) container.
-This is attractive when you don't need to interact with a host system, and
-therefore is a good fit for working in "the cloud." You still need to document
-your environments though in case you need to recreate them.
+This is attractive when you don't need to interact much with a host system, and
+therefore is a good fit for working in "the cloud." Of course, there are ways
+around that by mounting local storage inside your containers. You still need to document
+your environments to be able to recreate them.
 
 This is not the only way to set-up such an environment, and there are probably
 improvements I'll add over time. It works for me at the moment though.
